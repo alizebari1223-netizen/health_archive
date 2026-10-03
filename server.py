@@ -2088,6 +2088,7 @@ def logout():
     return jsonify(message="logged out")
 
 @app.route("/api/reset_password", methods=["POST"])
+@require_role(["super_admin"])
 @require_rate_limit
 def reset_password():
     """Super admin resets any user's password directly."""
@@ -3464,6 +3465,7 @@ def get_employee_card(personal_id):
 
 
 @app.route("/api/employees/<personal_id>/barcode_svg", methods=["GET"])
+@require_auth
 @require_rate_limit
 def get_employee_barcode_svg(personal_id):
     """Return a Code128 barcode dynamically generated as SVG text/XML for scanning off screen."""
