@@ -2088,8 +2088,8 @@ def logout():
     return jsonify(message="logged out")
 
 @app.route("/api/reset_password", methods=["POST"])
-@require_role(["super_admin"])
 @require_rate_limit
+@require_role(["super_admin"])
 def reset_password():
     """Super admin resets any user's password directly."""
     data     = request.get_json(silent=True) or {}
@@ -3465,8 +3465,8 @@ def get_employee_card(personal_id):
 
 
 @app.route("/api/employees/<personal_id>/barcode_svg", methods=["GET"])
-@require_auth
 @require_rate_limit
+@require_auth
 def get_employee_barcode_svg(personal_id):
     """Return a Code128 barcode dynamically generated as SVG text/XML for scanning off screen."""
     from reportlab.graphics import renderSVG
